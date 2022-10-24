@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import VisibilityIcon from '../assets/svg/visibilityIcon.svg'
+import OAuth from "../components/OAuth"
 
 
 const SignUp = () => {
@@ -58,7 +59,7 @@ const SignUp = () => {
     <>
       <div className="pageContainer">
         <header>
-          <p className="pageHeader">Welcome Back!</p>
+          <p className="pageHeader">Welcome!</p>
         </header>
         <form onSubmit={onSubmit}>
           <input type="text" className="nameInput" placeholder="Name" id="name" value={name} onChange={handleChange} />
@@ -77,7 +78,7 @@ const SignUp = () => {
           </div>
         </form>
 
-        {/* google oauth component */}
+        <OAuth />
 
         <Link to='/sign-in' className="registerLink">
           Sign In Instead
