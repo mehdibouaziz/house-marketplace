@@ -3,14 +3,14 @@ import {ReactComponent as DeleteIcon} from "../assets/svg/deleteIcon.svg"
 import bedIcon from "../assets/svg/bedIcon.svg"
 import bathtubIcon from "../assets/svg/bathtubIcon.svg"
 
-
+import { TbDiscount } from "react-icons/tb"
 
 
 const ListingItem = ({listing, id, onEdit, onDelete}) => {
   return (
     <li className="categoryListing">
       <Link to={`/category/${listing.type}/${id}`} className="categoryListingLink">
-        <img src={listing.imageUrls[0]} alt={listing.name} className="categoryListingImg" />
+        <img src={listing.imgUrls[0]} alt={listing.name} className="categoryListingImg" />
         <div className="categoryListingDetails">
           <p className="categoryListingLocation">
             {listing.location}
@@ -18,12 +18,15 @@ const ListingItem = ({listing, id, onEdit, onDelete}) => {
           <p className="categoryListingName">
             {listing.name}
           </p>
+          <div className="categoryListingPriceDiv">
+          {listing.offer && <TbDiscount className="categoryListingDiscountIcon" />}
           <p className="categoryListingPrice">
             ${listing.offer ? listing.discountedPrice.toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',') : listing.regularPrice.toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             {listing.type === 'rent' && ' / Month'}
           </p>
+          </div>
           <div className="categoryListingInfoDiv">
             <img src={bedIcon} alt="bedroom" />
             <p className="categoryListingInfoText">{listing.bedrooms > 1 ? `${listing.bedrooms} Bedrooms` : `${listing.bedrooms} Bedroom`}</p>

@@ -462,6 +462,17 @@ button {
   justify-content: space-between;
   max-width: 275px;
 }
+.categoryListingPriceDiv {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  gap: 5px;
+  max-width: 275px;
+}
+.categoryListingDiscountIcon{
+  font-size: 1.3rem;
+  color: #00cc66;
+}
 
 .categoryListingInfoText {
   font-weight: 500;
