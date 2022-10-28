@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from '../firebase.config'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate } from "react-router-dom";
@@ -91,7 +92,7 @@ const CreateListing = () => {
     let location
 
     if(geolocationEnabled){
-      const response = await fetch(`https://geocode.maps.co/search?q=${address.replace(' ','+')}`)
+      const response = await fetch(`https://geocode.maps.co/search?q=${address.replace(/\s/g,'+').replace(/[,]/g,'')}`)
       const data = await response.json()
 
       geolocation.lat = data[0]?.lat ?? 0
@@ -160,9 +161,25 @@ const CreateListing = () => {
       return
     })
 
-    console.log(imgUrls)
+    // consolidate data
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      geolocation,
+      timestamp: serverTimestamp()
+    }
+    // cleanup unnecessary data
+    delete formDataCopy.images
+    delete formDataCopy.address
+    location && (formDataCopy.location = location)
+    !formDataCopy.offer && (delete formDataCopy.discountedPrice)
 
+    // submit to the database
+    const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
+    toast.success("New listing saved")
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+
   };
 
   const onMutate = (e) => {
