@@ -17,6 +17,7 @@ import 'swiper/css/bundle';
 
 import Spinner from "../components/Spinner";
 import shareIcon from "../assets/svg/shareIcon.svg";
+import returnIcon from "../assets/svg/keyboardArrowRightIcon.svg";
 
 const Listing = () => {
   const [listing, setListing] = useState(null);
@@ -73,6 +74,10 @@ const Listing = () => {
           ))}
       </Swiper>
 
+
+      <div className="returnIconDiv" onClick={() => window.history.back()}>
+        <img src={returnIcon} alt="share" />
+      </div>
       <div className="shareIconDiv" onClick={shareClick}>
         <img src={shareIcon} alt="share" />
       </div>
