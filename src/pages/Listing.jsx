@@ -42,7 +42,6 @@ const Listing = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setListing({...docSnap.data(), id: params.listingId});
-        console.log({...docSnap.data(), id: params.listingId})
         setLoading(false);
       }
     };
