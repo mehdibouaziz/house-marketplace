@@ -465,8 +465,8 @@ button {
 }
 .categoryListingPriceDiv {
   display: flex;
-  justify-content: start;
-  align-items: end;
+  justify-content: flex-start;
+  align-items: flex-end;
   gap: 5px;
   max-width: 275px;
 }

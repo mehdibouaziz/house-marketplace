@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
-import { list } from "firebase/storage";
+// import { list } from "firebase/storage";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 // Core swiper modules imports
